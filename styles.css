@@ -227,6 +227,8 @@ p {
 input {
     color: rgb(162, 103, 146);
     font-family: "Open Sans";
+    padding: 5px; /* Adjust the vertical padding */
+    height: 0.9em; /* Adjust line height to reduce overall height */
 }
 
 input::placeholder {
@@ -234,4 +236,75 @@ input::placeholder {
     opacity: 1; /* Firefox lowers the opacity by default */
     font-size: 0.9em;
     font-family: "Open Sans"
+}
+
+.intern-table {
+    width: 100%; /* Full width */
+    border-collapse: collapse; /* Collapse borders */
+    margin-top: 1em; /* Space above the table */
+}
+
+.intern-table th, .intern-table td {
+    border: none; /* Remove borders */
+    padding: 8px; /* Padding for cells */
+    text-align: left; /* Align text to the left */
+    background-color: transparent; /* Remove background color */
+}
+
+.intern-table th {
+    font-family: "Source Code Pro"; /* Match font style */
+    font-weight: 650; /* Bold headers */
+    font-size: 1.1em;
+}
+
+.intern-table td {
+    font-family: "Open Sans"; /* Match font style */
+    font-weight: 400; /* Bold headers */
+    font-size: 0.9em;
+    transition: background-color 0.3s ease; /* Transition for background color */
+}
+
+.intern-table tr:hover td {
+    background-color: rgba(163, 130, 154, 0.1); /* Light background color on hover */
+}
+
+
+.status {
+    display: inline-block; /* Inline block for proper sizing */
+    padding: 5px 10px; /* Padding for the button-like appearance */
+    border-radius: 0.6em; /* Rounded corners */
+    font-size: 0.9em; /* Adjust font size as needed */
+    color: white; /* Text color */
+}
+
+.status-open {
+    background-color: rgb(1, 130, 1); /* Green background for 'Open' */
+}
+
+.status-closed {
+    background-color: rgb(210, 0, 0); /* Red background for 'Closed' */
+}
+
+.intern-table td a {
+    font-family: "Source Code Pro"; /* Optional: Match the title font */
+    position: relative; /* Needed for the pseudo-element */
+}
+
+/* Add this for the thick underline effect */
+.intern-table td a::after {
+    content: "";
+    display: block;
+    height: 3px; /* Thickness of the underline */
+    background-color: rgb(255, 212, 219);; /* Color of the underline */
+    width: 100%; /* Full width */
+    position: absolute;
+    left: 0;
+    bottom: 0; /* Position it at the bottom */
+    transform: scaleX(1); /* Initially scale down to 0 */
+    transition: transform 0.3s ease; /* Transition for the underline */
+}
+
+/* Scale it to full size on hover */
+.intern-table td a:hover::after {
+    transform: scaleX(0);
 }
