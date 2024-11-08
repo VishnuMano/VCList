@@ -191,6 +191,14 @@ p {
     margin-right: 20px; /* Space between line and text */
 }
 
+.vertical-line-two {
+    width: 5px; /* Width of the vertical line */
+    background-color: rgb(162, 103, 146); /* Dark purple color */
+    height: auto; /* Allow it to stretch */
+    min-height: 27px; /* Minimum height to ensure visibility */
+    margin-right: 20px; /* Space between line and text */
+}
+
 .intern-programs h3, .fulltime-programs h3, .not-updated h3 {
     margin: 0; /* Remove default margin */
     font-family: "Source Code Pro", monospace; /* Match font style */
@@ -319,4 +327,53 @@ input::placeholder {
 /* Scale it to full size on hover */
 .intern-table td a:hover::after {
     transform: scaleX(0);
+}
+
+.interview-prep {
+    margin-top: 2em;
+}
+
+.interview-prep h3 {
+    font-family: "Source Code Pro", monospace;
+    font-size: 1.5em;
+    font-weight: 650;
+    border-left: 4px solid rgb(162, 103, 146); /* Custom border color */
+    padding-left: 10px;
+    margin-bottom: 0.5em;
+}
+
+.interview-prep p {
+    font-family: "Source Code Pro", monospace;
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 1em;
+}
+
+.resource-list {
+    list-style-type: circle; /* Bullet points */
+    padding-left: 20px; /* Indent the list */
+    font-family: "Source Code Pro", monospace; /* Set font family */
+}
+
+.resource-list li {
+    margin-bottom: 1.5em;
+    padding-left: 10px; /* Add indentation */
+}
+
+.resource-list strong {
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: 0.3em;
+}
+
+.resource-list span {
+    font-style: italic;
+    color: rgb(162, 103, 146); /* Matching the custom color for names */
+}
+
+.resource-description {
+    margin-left: 20px; /* Slight indent for descriptions */
+    font-size: 0.95em;
+    color: #333;
+    line-height: 1.6;
 }
