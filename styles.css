@@ -95,7 +95,6 @@ a {
 }
 
 /* Media Queries for responsive adjustments */
-/* Media Queries for responsive adjustments */
 @media (max-width: 1500px) {
     .main-container {
         width: 60%; /* Adjust width for screens 800px and below */
@@ -245,10 +244,24 @@ input::placeholder {
 }
 
 .intern-table th, .intern-table td {
-    border: none; /* Remove borders */
-    padding: 8px; /* Padding for cells */
-    text-align: left; /* Align text to the left */
-    background-color: transparent; /* Remove background color */
+    padding: 8px;
+    text-align: left;
+}
+
+/* Set fixed width for consistent alignment across tables */
+.intern-table th:nth-child(2), .intern-table td:nth-child(2) {
+    width: 100px; /* Adjust as needed for 'Status' column */
+    text-align: center; /* Center align for consistency */
+}
+
+.intern-table th:nth-child(3), .intern-table td:nth-child(3) {
+    width: 120px; /* Adjust as needed for 'Target' column */
+    text-align: center;
+}
+
+.intern-table th:nth-child(4), .intern-table td:nth-child(4) {
+    width: 100px; /* Adjust as needed for 'Est. Comp' column */
+    text-align: center;
 }
 
 .intern-table th {
@@ -267,7 +280,6 @@ input::placeholder {
 .intern-table tr:hover td {
     background-color: rgba(163, 130, 154, 0.1); /* Light background color on hover */
 }
-
 
 .status {
     display: inline-block; /* Inline block for proper sizing */
@@ -295,7 +307,7 @@ input::placeholder {
     content: "";
     display: block;
     height: 3px; /* Thickness of the underline */
-    background-color: rgb(255, 212, 219);; /* Color of the underline */
+    background-color: rgb(255, 212, 219); /* Color of the underline */
     width: 100%; /* Full width */
     position: absolute;
     left: 0;
