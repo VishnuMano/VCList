@@ -1,10 +1,57 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>VC List: Venture Capital and Growth Equity Job List</title>
+
+    <script type="module">
+        // Import necessary Firebase functions
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
+      
+        // Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDRjVH7yhvPZHVfIkFDEpupJWhW04ZfP7Y",
+          authDomain: "vclist-61383.firebaseapp.com",
+          projectId: "vclist-61383",
+          storageBucket: "vclist-61383.firebasestorage.app",
+          messagingSenderId: "426260528989",
+          appId: "1:426260528989:web:8a4e127f1879cbf50b72b4",
+          measurementId: "G-CSK0V6JNBK"
+        };
+      
+        // Initialize Firebase and Firestore
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+      
+        // Select the email form
+        const emailForm = document.querySelector(".email-updates form");
+      
+        // Add event listener to handle form submission
+        emailForm.addEventListener("submit", async function(event) {
+          event.preventDefault();
+      
+          const email = emailForm.querySelector("input[type='email']").value;
+      
+          try {
+            // Add email to Firestore
+            await addDoc(collection(db, "emails"), {
+              email: email,
+              timestamp: serverTimestamp()
+            });
+            alert("Email saved successfully.");
+            emailForm.querySelector("input[type='email']").value = ""; // Clear the input field
+          } catch (error) {
+            console.error("Error saving email: ", error);
+            alert("There was an error. Please try again.");
+          }
+        });
+      </script>
 </head>
 <body>
     <div class="main-container">
@@ -24,10 +71,10 @@
         <div class="nav">
             <nav class="navbar">
                 <ul>
-                    <li><a href="#the-list">The List</a></li>
-                    <li><a href="#resources">Resources</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#partners">Partners</a></li>
+                    <li><a href="index.html">The List</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="partners.html">Partners</a></li>
                 </ul>
             </nav>
         </div>
@@ -45,46 +92,7 @@
                 <input type="email" placeholder="Enter your email" required>
                 <button type="submit">Subscribe</button>
             </form>
-        </div>
-        
-        <div class="intern-programs">
-            <div class="vertical-line"></div>
-            <div class="intern-content">
-                <h3>Internships</h3>
-                <p>Programs for undergraduate and graduate students looking for summer internship experiences.</p>
-            </div>
-        </div>
-
-        <table class="intern-table">
-            <thead>
-                <tr>
-                    <th>Firm</th>
-                    <th>Status</th>
-                    <th>Target</th>
-                    <th>Est. Comp</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><a href="https://www.sequoiacap.com/" target="_blank">Sequoia Capital</a></td>
-                    <td><span class="status status-open">Open</span></td>
-                    <td>Undergrad</td>
-                    <td>$20/hour</td>
-                </tr>
-                <tr>
-                    <td><a href="https://www.valor.vc/" target="_blank">Valor Ventures</a></td>
-                    <td><span class="status status-closed">Closed</span></td>
-                    <td>Grad</td>
-                    <td>$15/hour</td>
-                </tr>
-                <tr>
-                    <td><a href="https://gtangelnetwork.com/" target="_blank">GT Angel Network</a></td>
-                    <td><span class="status status-open">Open</span></td>
-                    <td>Undergrad/Grad</td>
-                    <td>$25/hour</td>
-                </tr>
-            </tbody>
-        </table>
+        </div>        
 
         <div class="intern-programs">
             <div class="vertical-line"></div>
@@ -100,7 +108,6 @@
                     <th>Firm</th>
                     <th>Status</th>
                     <th>Target</th>
-                    <th>Est. Comp</th>
                 </tr>
             </thead>
             <tbody>
@@ -108,49 +115,41 @@
                     <td><a href="https://neafellowship.com/" target="_blank">New Enterprise Associates Fellowship</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://fellows.kleinerperkins.com/" target="_blank">Kleiner Perkins Fellowship</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://www.bvp.com/bessemer-fellows" target="_blank">Bessemer Venture Fellowship</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://pear.vc/fellows-application/" target="_blank">Pear Fellows</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://airtable.com/appFUB2OGjSjJLePP/shrmKB5TxbmUKgWXj" target="_blank">Kauffman Fellowship</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://included.vc/" target="_blank">Included VC</a></td>
                     <td><span class="status status-closed">Closed</span></td>
                     <td>Undergrad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://www.406ventures.com/files/Student_Fellows_Program_2024.pdf" target="_blank">.406 Ventures Student Fellows Program</a></td>
                     <td><span class="status status-closed">Closed</span></td>
                     <td>Undergrad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://airtable.com/app2XtWdvstTp5Omc/shrez1Diq9BVSAYHa" target="_blank">RippleX Fellowship</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>N/A</td>
                 </tr>
             </tbody>
         </table>
@@ -172,25 +171,21 @@
                     <td><a href="https://www.ugrowthfund.com/program/" target="_blank">University Growth Fund</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://www.contrary.com/blog/venture-partner-apps-2024" target="_blank">Contrary</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://www.dormroomfund.com/opportunities" target="_blank">Dorm Room Fund</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://docs.google.com/forms/d/e/1FAIpQLSevezDAuqX0RVFNzed3j9gcZYCjNaX_d8z139xmttAAM8hMaw/viewform" target="_blank">Crater Ventures</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad</td>
-                    <td>N/A</td>
                 </tr>
             </tbody>
         </table>
@@ -210,7 +205,6 @@
                     <th>Firm</th>
                     <th>Status</th>
                     <th>Target</th>
-                    <th>Est. Comp</th>
                 </tr>
             </thead>
             <tbody>
@@ -218,67 +212,56 @@
                     <td><a href="https://valor.vc/venture-capital-intern-atlanta/" target="_blank">Valor Ventures</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>$15/hour</td>
                 </tr>
                 <tr>
                     <td><a href="https://engage.vc/internship-program/" target="_blank">Tech Square Ventures</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://www.se.com/ww/en/about-us/careers/job-details/se-ventures-marketing-intern/79324/?utm_source=venturecapitalcareers" target="_blank">SE Ventures Marketing Intern</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://a16z.com/about/jobs/?gh_jid=6242445003" target="_blank">Andreessen Horowitz Crypto Research Intern</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Grad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://johngannonblog.com/venture-capital-jobs-in-new-york-city/vc-analyst-bullish-in-new-york-city-ny/" target="_blank">Bullish</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://arcny.bamboohr.com/careers/69" target="_blank">Arc Ventures</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://www.bvp.com/analyst-program#Summer-Analyst-Opportunities" target="_blank">Bessemer Venture Partners</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://www.stepstonegroup.com/current-opportunities/?gh_jid=6127571" target="_blank">StepStone Group Venture Capital Analyst</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Grad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://www.remarkable.vc/news/remarkable-ventures-paid-ir-associate-intern?" target="_blank">Remarkable VC Internship Program</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://airtable.com/appcAhG1GeRQvivLu/shr4DQuIeN0Wya86l" target="_blank">byFounders Internship</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>N/A</td>
                 </tr>
                 <tr>
                     <td><a href="https://join.com/companies/firstmomentum12/12766113-vc-operations-and-platform-internship-munich-or-remote-6-months-starting-july-2025" target="_blank">FirstMomentum Ventures</a></td>
                     <td><span class="status status-open">Open</span></td>
                     <td>Undergrad/Grad</td>
-                    <td>N/A</td>
                 </tr>
             </tbody>
         </table>
@@ -290,7 +273,7 @@
                     If there is information that isn't updated, fill out this <a href="https://forms.gle/dhAoLrT8jf686mCL6" class="underline">form</a> and we will update the list ASAP.
                 </p>
                 <p>
-                    Is your company not featured on the list? Do you want to add a sponsored VC role? Reach out to example@gmail.com.
+                    Is your company not featured on the list? Do you want to add a sponsored VC role? Reach out to krissh.bhargava@gmail.com.
                 </p>
             </div>
         </div>
