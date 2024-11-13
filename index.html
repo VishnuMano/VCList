@@ -1,58 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>VC List: Venture Capital and Growth Equity Job List</title>
-
-    <script type="module">
-        // Import necessary Firebase functions
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-firestore.js";
-      
-        // Firebase configuration
-        const firebaseConfig = {
-          apiKey: "APIKEY",
-          authDomain: "DOMAIN",
-          projectId: "PROJECTID",
-          storageBucket: "VCLIST",
-          messagingSenderId: "VCLIST",
-          appId: "APID",
-          measurementId: "G-MEASUREMENTID"
-        };
-        
-      
-        // Initialize Firebase and Firestore
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-      
-        // Select the email form
-        const emailForm = document.querySelector(".email-updates form");
-      
-        // Add event listener to handle form submission
-        emailForm.addEventListener("submit", async function(event) {
-          event.preventDefault();
-      
-          const email = emailForm.querySelector("input[type='email']").value;
-      
-          try {
-            // Add email to Firestore
-            await addDoc(collection(db, "emails"), {
-              email: email,
-              timestamp: serverTimestamp()
-            });
-            alert("Email saved successfully.");
-            emailForm.querySelector("input[type='email']").value = ""; // Clear the input field
-          } catch (error) {
-            console.error("Error saving email: ", error);
-            alert("There was an error. Please try again.");
-          }
-        });
-      </script>
 </head>
 <body>
     <div class="main-container">
@@ -69,6 +21,7 @@
                 </span>
             </div>
         </div>
+
         <div class="nav">
             <nav class="navbar">
                 <ul>
@@ -87,13 +40,14 @@
                 Venture capitalist roles train young professionals to hone their analytical skills and gain industry insights. Many VCs eventually transition to roles in entrepreneurship, corporate development, or even launch their own startups, leveraging their experience in the venture ecosystem to drive impact and growth in various sectors.
             </p>
         </div>
+
         <div class="email-updates">
             <h3>Get Email Updates When VC Roles Open</h3>
-            <form action="#" method="post">
-                <input type="email" placeholder="Enter your email" required>
+            <form id="emailForm" action="#" method="post">
+                <input type="email" id="email" placeholder="Enter your email" required>
                 <button type="submit">Subscribe</button>
             </form>
-        </div>        
+        </div>   
 
         <div class="intern-programs">
             <div class="vertical-line"></div>
@@ -279,6 +233,33 @@
             </div>
         </div>
         
+        <script>
+            document.getElementById('emailForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const email = document.getElementById('email').value;
+
+                fetch('http://localhost:3000/add-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email: email })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert('Email saved successfully!');
+                        document.getElementById('email').value = '';
+                    } else {
+                        alert('There was an error. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an error. Please try again.');
+                });
+            });
+        </script>
     </div>
 </body>
 </html>
